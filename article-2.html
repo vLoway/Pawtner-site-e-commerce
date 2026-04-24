@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comment lire une étiquette de croquettes — Pawtner Blog</title>
+  <meta name="description" content="Ordre des ingrédients, farine vs viande fraîche, additifs à éviter et teneurs analytiques : décryptage complet d'une étiquette de croquettes." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header id="header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-paw">🐾</div>
+      <div class="logo-text">Pawt<span>ner</span></div>
+    </a>
+    <nav class="main-nav">
+      <a class="nav-link" href="index.html">Accueil</a>
+      <a class="nav-link" href="boutique.html">Boutique</a>
+      <a class="nav-link active" href="blog.html">Blog</a>
+      <a class="nav-link" href="mission.html">Notre Mission</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="cart-btn" onclick="toggleCart()" aria-label="Panier">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-count hidden" id="cartCount">0</span>
+      </button>
+      <button class="burger-btn" id="burgerBtn" onclick="toggleMobileNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <a class="nav-link" href="index.html">Accueil</a>
+  <a class="nav-link" href="boutique.html">Boutique</a>
+  <a class="nav-link" href="blog.html">Blog</a>
+  <a class="nav-link" href="mission.html">Notre Mission</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+</nav>
+
+<main>
+  <section class="section">
+    <div class="container-sm">
+
+      <a class="article-back" href="blog.html">← Retour au blog</a>
+
+      <div class="article-header">
+        <span class="article-tag">Nutrition</span>
+        <h1 class="article-title">Comment lire une étiquette de croquettes : ce que les marques ne vous disent pas</h1>
+        <div class="article-meta">
+          <span>📅 28 janvier 2025</span>
+          <span>⏱ 10 min de lecture</span>
+          <span>✍️ Équipe Pawtner</span>
+        </div>
+      </div>
+
+      <div class="article-hero-img" style="background:#EEF5EE;">🏷️</div>
+
+      <div class="article-body">
+
+        <h2>Pourquoi les étiquettes de croquettes sont complexes</h2>
+        <p>La réglementation européenne (règlement CE 767/2009) oblige les fabricants à afficher certaines informations, mais leur présentation est souvent conçue pour mettre en valeur le produit plutôt que pour informer réellement le consommateur. Voici comment décrypter une étiquette de A à Z.</p>
+
+        <h2>1. La liste des ingrédients : l'ordre révèle tout</h2>
+        <p>En Europe, les ingrédients sont listés <strong>par ordre décroissant de poids au moment de la fabrication</strong>. Le premier ingrédient est donc le plus présent. C'est là que tout commence.</p>
+
+        <h3>Viande fraîche vs farine de viande : une différence cruciale</h3>
+        <p>Supposons qu'une croquette affiche "Poulet frais" en premier ingrédient. Cela semble bien — mais le poulet frais contient environ 70–75 % d'eau. Une fois cuit et déshydraté lors de la fabrication, sa proportion réelle tombe à seulement 20–25 % du poids initial.</p>
+        <p>En comparaison, la "farine de poulet" (ou "protéines de poulet déshydratées") est déjà sèche : sa proportion affichée correspond davantage à sa proportion réelle dans le produit fini. Une croquette avec "farine de poulet" en 3e position peut donc en contenir <em>plus</em> qu'une croquette avec "poulet frais" en 1re position.</p>
+        <div class="info-box"><p>💡 <strong>Truc de lecture :</strong> Cherchez la mention de l'eau ou du taux d'humidité dans les teneurs analytiques. Si elle est élevée (&gt;12%), les ingrédients frais pèsent plus mais apportent moins de nutriments secs.</p></div>
+
+        <h3>Le fractionnement des ingrédients</h3>
+        <p>Certains fabricants fractionnent délibérément les sources de céréales pour qu'elles n'apparaissent pas en tête de liste. Par exemple : "Poulet, <strong>riz, farine de riz, farine de maïs, gluten de maïs</strong>". Si on additionne tous les dérivés céréaliers, ils dépasseraient le poulet. C'est une pratique légale mais trompeuse.</p>
+
+        <h2>2. Les teneurs analytiques</h2>
+        <p>Les quatre valeurs minimales légalement obligatoires sont :</p>
+        <table>
+          <tr><th>Paramètre</th><th>Chien adulte (min. recommandé)</th><th>Ce que c'est</th></tr>
+          <tr><td>Protéines brutes</td><td>≥ 21 %</td><td>Source d'acides aminés essentiels</td></tr>
+          <tr><td>Matières grasses brutes</td><td>≥ 8 %</td><td>Énergie, acides gras, vitamines ADEK</td></tr>
+          <tr><td>Cellulose brute</td><td>≤ 5 %</td><td>Fibres — transit intestinal</td></tr>
+          <tr><td>Cendres brutes</td><td>≤ 8 %</td><td>Minéraux (calcium, phosphore…)</td></tr>
+        </table>
+        <p>Ce que ces chiffres ne disent pas : la <strong>digestibilité</strong>. Des protéines brutes à 30 % issues de plumes hydrolysées (légal !) valent bien moins que 25 % de protéines issues de viande de qualité. La digestibilité ne figure pas sur l'étiquette.</p>
+
+        <h2>3. Les additifs : les bons, les neutres et les mauvais</h2>
+        <h3>Additifs technologiques à surveiller</h3>
+        <ul>
+          <li><strong>BHA (E320) et BHT (E321) :</strong> antioxydants synthétiques controversés. Préférez les croquettes avec tocophérols (vitamine E naturelle) ou extrait de romarin.</li>
+          <li><strong>Propylène glycol (E1520) :</strong> humectant interdit dans les aliments pour chats, déconseillé pour les chiens aussi.</li>
+          <li><strong>Colorants artificiels (E102, E110, E129…) :</strong> absolument inutiles — les chiens ne distinguent pas les couleurs comme les humains. Leur présence sert exclusivement à séduire l'œil du propriétaire.</li>
+        </ul>
+
+        <h3>Additifs nutritionnels courants (inoffensifs)</h3>
+        <ul>
+          <li>Vitamines A, D3, E — ajout légitime pour compenser les pertes à la cuisson</li>
+          <li>Sulfate de zinc, sulfate de manganèse — minéraux essentiels</li>
+          <li>Taurine — acide aminé indispensable, surtout pour les chats</li>
+        </ul>
+
+        <h2>4. Les mentions marketing à relativiser</h2>
+        <p>La réglementation encadre assez peu les claims marketing sur les emballages. Voici quelques formulations courantes et leur réalité :</p>
+        <table>
+          <tr><th>Mention</th><th>Ce que ça signifie vraiment</th></tr>
+          <tr><td>"Riche en poulet"</td><td>Au moins 26% de poulet dans le produit fini</td></tr>
+          <tr><td>"Au poulet"</td><td>Seulement 4% minimum de poulet</td></tr>
+          <tr><td>"Saveur poulet"</td><td>Peut contenir moins de 4%, voire juste un arôme</td></tr>
+          <tr><td>"Sans céréales" (grain-free)</td><td>Remplacées par des légumineuses (pois, lentilles) — pas forcément meilleur</td></tr>
+          <tr><td>"Naturel"</td><td>Terme non réglementé — à vérifier dans la composition</td></tr>
+          <tr><td>"Premium" / "Super-premium"</td><td>Aucune définition légale — purement marketing</td></tr>
+        </table>
+
+        <h2>5. Le calcul des glucides (non affiché)</h2>
+        <p>Les croquettes n'ont pas l'obligation d'afficher leur teneur en glucides. Vous pouvez la calculer : <strong>100 − protéines − graisses − cellulose − cendres − humidité = glucides approximatifs</strong>. Une teneur élevée (&gt;40%) indique souvent une croquette très riche en céréales.</p>
+
+        <div class="info-box"><p>🎯 <strong>En résumé :</strong> Une bonne croquette affiche de la viande ou de la farine de viande nommée (poulet, agneau, saumon — pas "viandes et sous-produits d'origine animale") dans les premiers ingrédients, des antioxydants naturels, aucun colorant artificiel, et des teneurs analytiques cohérentes avec les besoins de votre chien.</p></div>
+
+        <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--warm);display:flex;gap:16px;flex-wrap:wrap;">
+          <a href="article-1.html" class="btn btn-secondary">← Article précédent</a>
+          <a href="article-3.html" class="btn btn-outline">Article suivant →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ══ PANIER ══ -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h3>🛒 Mon panier</h3>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-summary">
+      <div class="cart-row"><span>Sous-total</span><span id="cartSubtotal">0,00 €</span></div>
+      <div class="cart-row"><span>Livraison</span><span>3,99 €</span></div>
+      <div class="cart-row total"><span>Total</span><span id="cartTotal">0,00 €</span></div>
+    </div>
+    <button class="btn btn-primary cart-checkout" onclick="openCheckout()">Passer commande →</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Finaliser ma commande</h3>
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="modal-body" id="checkoutBody">
+      <form onsubmit="confirmOrder(event)">
+        <h4 style="font-family:'Fraunces',serif;font-size:16px;margin-bottom:16px;color:var(--muted);">Informations de livraison</h4>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Prénom</label><input class="form-input" type="text" placeholder="Jean" required /></div>
+          <div class="form-group"><label class="form-label">Nom</label><input class="form-input" type="text" placeholder="Dupont" required /></div>
+        </div>
+        <div class="form-group"><label class="form-label">Adresse</label><input class="form-input" type="text" placeholder="12 rue de la Paix" required /></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Code postal</label><input class="form-input" type="text" placeholder="75001" required /></div>
+          <div class="form-group"><label class="form-label">Ville</label><input class="form-input" type="text" placeholder="Paris" required /></div>
+        </div>
+        <h4 style="font-family:'Fraunces',serif;font-size:16px;margin:20px 0 16px;color:var(--muted);">Paiement (simulation)</h4>
+        <div class="card-preview">
+          <div class="card-chip">💳</div>
+          <div class="card-number">•••• •••• •••• ••••</div>
+          <div class="card-meta"><span>TITULAIRE</span><span>MM/AA</span></div>
+        </div>
+        <div class="form-group"><label class="form-label">Numéro de carte</label><input class="form-input" type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)" required /></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Date d'expiration</label><input class="form-input" type="text" placeholder="MM/AA" maxlength="5" required /></div>
+          <div class="form-group"><label class="form-label">CVV</label><input class="form-input" type="text" placeholder="•••" maxlength="3" required /></div>
+        </div>
+        <div style="background:rgba(122,158,126,.12);border-radius:8px;padding:12px 14px;font-size:13px;color:#3a4a3c;margin-bottom:20px;">
+          🔒 Paiement 100% fictif — aucune donnée bancaire n'est collectée ou transmise.
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:15px;">Confirmer la commande →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut">↑</button>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="index.html">
+          <div class="logo-paw">🐾</div>
+          <div class="logo-text">Pawt<span>ner</span></div>
+        </a>
+        <p>"Tout pour votre compagnon, sans compromis."</p>
+        <div class="footer-socials">
+          <div class="social-btn" title="Instagram (fictif)">📸</div>
+          <div class="social-btn" title="TikTok (fictif)">🎵</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="boutique.html">Boutique</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="mission.html">Notre Mission</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Informations</h4>
+        <ul>
+          <li><a href="legal.html">Mentions légales</a></li>
+          <li><a href="legal.html">Confidentialité</a></li>
+          <li><a href="contact.html">Livraison &amp; retours</a></li>
+          <li><a href="contact.html">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Pawtner — Site fictif à vocation académique</span>
+      <span>Mémoire Bachelor DCM Bac+3</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => { updateCartUI(); });
+</script>
+<!-- Chatbot Pawtner -->
+<div id="pw-launcher" onclick="pwOpen()">
+  <div id="pw-hint">Une question ? 🐾</div>
+  <div id="pw-btn">
+    <img src="Images/logochatbot.png" alt="Pawtner">
+  </div>
+</div>
+<div id="pw-chat">
+  <div id="pw-head">
+    <div id="pw-head-avatar">
+      <img src="Images/logochatbot.png" alt="Pawtner">
+    </div>
+    <div id="pw-head-info">
+      <div id="pw-head-name">Pawtner</div>
+      <div id="pw-head-status"><span class="pw-dot"></span>Répond instantanément</div>
+    </div>
+    <button id="pw-x" onclick="pwClose()">×</button>
+  </div>
+  <div id="pw-msgs">
+    <div class="pw-m bot">Bonjour ! Je suis là pour répondre à toutes vos questions sur vos commandes, nos produits et notre marque 🐾</div>
+  </div>
+  <div id="pw-chips">
+    <button class="pw-chip" onclick="pwChip(this)">Où est ma commande ?</button>
+    <button class="pw-chip" onclick="pwChip(this)">Faire un retour</button>
+    <button class="pw-chip" onclick="pwChip(this)">Être remboursé</button>
+    <button class="pw-chip" onclick="pwChip(this)">Provenance des produits</button>
+    <button class="pw-chip" onclick="pwChip(this)">Fiabilité de Pawtner</button>
+    <button class="pw-chip" onclick="pwChip(this)">Délai de livraison</button>
+  </div>
+  <div id="pw-bar">
+    <input id="pw-inp" placeholder="Votre question..." autocomplete="off"
+      onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();pwSend()}" />
+    <button id="pw-go" onclick="pwSend()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M14.5 8L1.5 1.5l2.8 6.5-2.8 6.5L14.5 8z" fill="#FDF8F2"/>
+      </svg>
+    </button>
+  </div>
+  <div id="pw-foot">Pawtner · Toujours là pour votre chien</div>
+</div>
+<script src="chatbot.js"></script>
+</body>
+</html>

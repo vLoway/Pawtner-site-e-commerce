@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pawtner — Nutrition & accessoires pour chiens</title>
+  <meta name="description" content="Pawtner — croquettes testées en laboratoire, friandises naturelles et accessoires de qualité pour votre chien. Livraison 48h." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header id="header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-paw">🐾</div>
+      <div class="logo-text">Pawt<span>ner</span></div>
+    </a>
+    <nav class="main-nav">
+      <a class="nav-link active" href="index.html">Accueil</a>
+      <a class="nav-link" href="boutique.html">Boutique</a>
+      <a class="nav-link" href="blog.html">Blog</a>
+      <a class="nav-link" href="mission.html">Notre Mission</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="cart-btn" onclick="toggleCart()" aria-label="Panier">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-count hidden" id="cartCount">0</span>
+      </button>
+      <button class="burger-btn" id="burgerBtn" onclick="toggleMobileNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<nav class="mobile-nav" id="mobileNav">
+  <a class="nav-link" href="index.html">Accueil</a>
+  <a class="nav-link" href="boutique.html">Boutique</a>
+  <a class="nav-link" href="blog.html">Blog</a>
+  <a class="nav-link" href="mission.html">Notre Mission</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+</nav>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">🐕 Pour chiens &amp; chats</div>
+      <h1>Tout pour votre compagnon,<br>sans compromis.</h1>
+      <p>Croquettes testées en laboratoire, friandises naturelles et accessoires de qualité — pensés pour les chiens.</p>
+      <a href="boutique.html" class="btn btn-primary" style="font-size:16px;padding:16px 36px;">Découvrir la boutique →</a>
+      <div class="hero-badges">
+        <div class="badge"><span class="badge-icon">🔬</span> Croquettes testées en laboratoire</div>
+        <div class="badge"><span class="badge-icon">🚚</span> Livraison 48h</div>
+        <div class="badge"><span class="badge-icon">🌿</span> 100% naturel</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div><div class="stat-num">15+</div><div class="stat-label">Produits sélectionnés</div></div>
+        <div><div class="stat-num">4</div><div class="stat-label">Catégories</div></div>
+        <div><div class="stat-num">48h</div><div class="stat-label">Délai de livraison</div></div>
+        <div><div class="stat-num">100%</div><div class="stat-label">Ingrédients naturels</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catégories -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Nos catégories</h2>
+        <p class="section-subtitle">Tout ce dont votre compagnon a besoin, au même endroit</p>
+      </div>
+      <div class="categories-grid">
+        <a class="cat-card" href="boutique.html?cat=Alimentation">
+          <div class="cat-emoji">🍖</div>
+          <div class="cat-name">Alimentation</div>
+          <div class="cat-count">5 produits</div>
+        </a>
+        <a class="cat-card" href="boutique.html?cat=Friandises">
+          <div class="cat-emoji">🦴</div>
+          <div class="cat-name">Friandises</div>
+          <div class="cat-count">4 produits</div>
+        </a>
+        <a class="cat-card" href="boutique.html?cat=Accessoires">
+          <div class="cat-emoji">🎽</div>
+          <div class="cat-name">Accessoires</div>
+          <div class="cat-count">4 produits</div>
+        </a>
+        <a class="cat-card" href="boutique.html?cat=Sant%C3%A9+%26+Compl%C3%A9ments">
+          <div class="cat-emoji">💊</div>
+          <div class="cat-name">Santé &amp; Compléments</div>
+          <div class="cat-count">2 produits</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Best-sellers -->
+  <section class="section" style="background:var(--warm);padding-top:60px;padding-bottom:60px;">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Nos best-sellers</h2>
+        <p class="section-subtitle">Les produits plébiscités par nos clients</p>
+      </div>
+      <div class="products-grid" id="featuredProducts"></div>
+      <div style="text-align:center;margin-top:40px;">
+        <a href="boutique.html" class="btn btn-outline">Voir tous les produits →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Confiance -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Pourquoi Pawtner ?</h2>
+        <p class="section-subtitle">Notre engagement envers vous et votre compagnon</p>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <div class="trust-icon">🔬</div>
+          <h3>Testé en laboratoire</h3>
+          <p>Chaque produit est analysé avant d'entrer dans notre catalogue. Zéro compromis sur la qualité nutritionnelle.</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon">🌿</div>
+          <h3>Naturel avant tout</h3>
+          <p>Zéro colorant artificiel, zéro conservateur chimique. Des ingrédients que vous pouvez prononcer.</p>
+        </div>
+        <div class="trust-card">
+          <div class="trust-icon">🚚</div>
+          <h3>Livraison 48h</h3>
+          <p>Commandez avant 15h, recevez sous 48h ouvrées. Emballage éco-responsable inclus.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog preview -->
+  <section class="section" style="background:var(--warm);padding-top:60px;padding-bottom:60px;">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Le blog Pawtner</h2>
+        <p class="section-subtitle">Conseils, guides et informations pour prendre soin de votre compagnon</p>
+      </div>
+      <div class="blog-grid">
+        <a class="blog-card" href="article-1.html">
+          <div class="blog-img" style="background:#FDF0E6;">🍽️</div>
+          <div class="blog-body">
+            <div class="blog-meta"><span class="blog-tag">Alimentation</span><span>15 Jan 2025</span></div>
+            <div class="blog-title">Quelle quantité de croquettes donner à mon chien ?</div>
+            <div class="blog-excerpt">Rations selon le poids, l'âge et l'activité : notre guide complet avec la méthode BCS.</div>
+            <div class="blog-read-more">Lire l'article →</div>
+          </div>
+        </a>
+        <a class="blog-card" href="article-2.html">
+          <div class="blog-img" style="background:#EEF5EE;">🏷️</div>
+          <div class="blog-body">
+            <div class="blog-meta"><span class="blog-tag">Nutrition</span><span>28 Jan 2025</span></div>
+            <div class="blog-title">Comment lire une étiquette de croquettes</div>
+            <div class="blog-excerpt">Ce que les marques ne vous disent pas : ordre des ingrédients, additifs à éviter.</div>
+            <div class="blog-read-more">Lire l'article →</div>
+          </div>
+        </a>
+        <a class="blog-card" href="article-3.html">
+          <div class="blog-img" style="background:#F5ECD8;">🎽</div>
+          <div class="blog-body">
+            <div class="blog-meta"><span class="blog-tag">Accessoires</span><span>10 Fév 2025</span></div>
+            <div class="blog-title">Harnais ou collier : comment choisir selon sa morphologie ?</div>
+            <div class="blog-excerpt">Risques du collier, avantages du harnais et guide des tailles par race.</div>
+            <div class="blog-read-more">Lire l'article →</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <div class="container" style="padding-bottom:80px;">
+    <div class="newsletter">
+      <h2>Rejoignez la communauté Pawtner</h2>
+      <p>Conseils nutrition, nouveaux produits et offres exclusives — directement dans votre boîte mail.</p>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="votre@email.fr" />
+        <button class="newsletter-btn" onclick="showToast('✉️ Merci ! Vous êtes inscrit(e).')">S'inscrire</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ══ PANIER ══ -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h3>🛒 Mon panier</h3>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-summary">
+      <div class="cart-row"><span>Sous-total</span><span id="cartSubtotal">0,00 €</span></div>
+      <div class="cart-row"><span>Livraison</span><span>3,99 €</span></div>
+      <div class="cart-row total"><span>Total</span><span id="cartTotal">0,00 €</span></div>
+    </div>
+    <button class="btn btn-primary cart-checkout" onclick="openCheckout()">Passer commande →</button>
+  </div>
+</div>
+
+<!-- ══ CHECKOUT MODAL ══ -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Finaliser ma commande</h3>
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="modal-body" id="checkoutBody">
+      <form onsubmit="confirmOrder(event)">
+        <h4 style="font-family:'Fraunces',serif;font-size:16px;margin-bottom:16px;color:var(--muted);">Informations de livraison</h4>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Prénom</label><input class="form-input" type="text" placeholder="Jean" required /></div>
+          <div class="form-group"><label class="form-label">Nom</label><input class="form-input" type="text" placeholder="Dupont" required /></div>
+        </div>
+        <div class="form-group"><label class="form-label">Adresse</label><input class="form-input" type="text" placeholder="12 rue de la Paix" required /></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Code postal</label><input class="form-input" type="text" placeholder="75001" required /></div>
+          <div class="form-group"><label class="form-label">Ville</label><input class="form-input" type="text" placeholder="Paris" required /></div>
+        </div>
+        <h4 style="font-family:'Fraunces',serif;font-size:16px;margin:20px 0 16px;color:var(--muted);">Paiement (simulation)</h4>
+        <div class="card-preview">
+          <div class="card-chip">💳</div>
+          <div class="card-number">•••• •••• •••• ••••</div>
+          <div class="card-meta"><span>TITULAIRE</span><span>MM/AA</span></div>
+        </div>
+        <div class="form-group"><label class="form-label">Numéro de carte</label><input class="form-input" type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)" required /></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Date d'expiration</label><input class="form-input" type="text" placeholder="MM/AA" maxlength="5" required /></div>
+          <div class="form-group"><label class="form-label">CVV</label><input class="form-input" type="text" placeholder="•••" maxlength="3" required /></div>
+        </div>
+        <div style="background:rgba(122,158,126,.12);border-radius:8px;padding:12px 14px;font-size:13px;color:#3a4a3c;margin-bottom:20px;">
+          🔒 Paiement 100% fictif — aucune donnée bancaire n'est collectée ou transmise.
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:15px;">Confirmer la commande →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ══ POPUP NEWSLETTER ══ -->
+<div id="newsletter-overlay" role="dialog" aria-modal="true" aria-labelledby="nl-title-el">
+  <div id="newsletter-box">
+    <button class="nl-close" onclick="closeNewsletter()" aria-label="Fermer">✕</button>
+
+    <div class="nl-visual">
+      <div class="nl-paws">
+        <span>🐾</span><span>🐶</span><span>🐾</span>
+      </div>
+      <span class="nl-badge">Offre exclusive — bienvenue !</span>
+    </div>
+
+    <div class="nl-body">
+      <h2 class="nl-title" id="nl-title-el">
+        <em>−15%</em> sur toute<br>la boutique
+      </h2>
+      <p class="nl-sub">Rejoignez la communauté Pawtner et recevez votre coupon<br>directement dans votre boîte mail.</p>
+
+      <div id="nl-form-wrap">
+        <div class="nl-form">
+          <input class="nl-input" id="nlEmail" type="email" placeholder="votre@email.com" autocomplete="email" />
+          <button class="nl-btn" onclick="submitNewsletter()">J'en profite →</button>
+        </div>
+        <div class="nl-guarantee">
+          <span>🔒</span> Aucun spam — désabonnement en 1 clic
+        </div>
+        <button class="nl-skip" onclick="closeNewsletter()">Non merci, je préfère payer plein tarif</button>
+      </div>
+
+      <div class="nl-success" id="nl-success">
+        <div class="nl-success-icon">🎉</div>
+        <div class="nl-success-title">C'est dans votre boîte !</div>
+        <div class="nl-coupon">PAWTNER15</div>
+        <div class="nl-success-sub">Copiez ce code et appliquez-le lors du paiement.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut">↑</button>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="index.html">
+          <div class="logo-paw">🐾</div>
+          <div class="logo-text">Pawt<span>ner</span></div>
+        </a>
+        <p>"Tout pour votre compagnon, sans compromis." — Nutrition et accessoires pour chiens, pensés par des passionnés.</p>
+        <div class="footer-socials">
+          <div class="social-btn" title="Instagram (fictif)">📸</div>
+          <div class="social-btn" title="TikTok (fictif)">🎵</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="boutique.html">Boutique</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="mission.html">Notre Mission</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Informations</h4>
+        <ul>
+          <li><a href="legal.html">Mentions légales</a></li>
+          <li><a href="legal.html">Confidentialité</a></li>
+          <li><a href="contact.html">Livraison &amp; retours</a></li>
+          <li><a href="contact.html">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Pawtner — Site fictif à vocation académique</span>
+      <span>Mémoire Bachelor DCM Bac+3</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    renderFeatured();
+    updateCartUI();
+    document.getElementById('newsletter-overlay').style.display = 'flex';
+  });
+
+  function closeNewsletter() {
+    const overlay = document.getElementById('newsletter-overlay');
+    overlay.classList.add('hidden');
+    setTimeout(() => overlay.style.display = 'none', 320);
+  }
+
+  function submitNewsletter() {
+    const input = document.getElementById('nlEmail');
+    if (!input.value || !input.value.includes('@')) {
+      input.style.outline = '2px solid #C8783A';
+      input.focus();
+      return;
+    }
+    input.style.outline = '';
+    document.getElementById('nl-form-wrap').style.display = 'none';
+    const success = document.getElementById('nl-success');
+    success.style.display = 'flex';
+    setTimeout(closeNewsletter, 4500);
+  }
+</script>
+<!-- Chatbot Pawtner -->
+<div id="pw-launcher" onclick="pwOpen()">
+  <div id="pw-hint">Une question ? 🐾</div>
+  <div id="pw-btn">
+    <img src="Images/logochatbot.png" alt="Pawtner">
+  </div>
+</div>
+<div id="pw-chat">
+  <div id="pw-head">
+    <div id="pw-head-avatar">
+      <img src="Images/logochatbot.png" alt="Pawtner">
+    </div>
+    <div id="pw-head-info">
+      <div id="pw-head-name">Pawtner</div>
+      <div id="pw-head-status"><span class="pw-dot"></span>Répond instantanément</div>
+    </div>
+    <button id="pw-x" onclick="pwClose()">×</button>
+  </div>
+  <div id="pw-msgs">
+    <div class="pw-m bot">Bonjour ! Je suis là pour répondre à toutes vos questions sur vos commandes, nos produits et notre marque 🐾</div>
+  </div>
+  <div id="pw-chips">
+    <button class="pw-chip" onclick="pwChip(this)">Où est ma commande ?</button>
+    <button class="pw-chip" onclick="pwChip(this)">Faire un retour</button>
+    <button class="pw-chip" onclick="pwChip(this)">Être remboursé</button>
+    <button class="pw-chip" onclick="pwChip(this)">Provenance des produits</button>
+    <button class="pw-chip" onclick="pwChip(this)">Fiabilité de Pawtner</button>
+    <button class="pw-chip" onclick="pwChip(this)">Délai de livraison</button>
+  </div>
+  <div id="pw-bar">
+    <input id="pw-inp" placeholder="Votre question..." autocomplete="off"
+      onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();pwSend()}" />
+    <button id="pw-go" onclick="pwSend()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M14.5 8L1.5 1.5l2.8 6.5-2.8 6.5L14.5 8z" fill="#FDF8F2"/>
+      </svg>
+    </button>
+  </div>
+  <div id="pw-foot">Pawtner · Toujours là pour votre chien</div>
+</div>
+<script src="chatbot.js"></script>
+</body>
+</html>

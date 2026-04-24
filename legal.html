@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mentions légales — Pawtner</title>
+  <meta name="description" content="Mentions légales du site fictif Pawtner — projet académique Bachelor DCM Bac+3." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header id="header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-paw">🐾</div>
+      <div class="logo-text">Pawt<span>ner</span></div>
+    </a>
+    <nav class="main-nav">
+      <a class="nav-link" href="index.html">Accueil</a>
+      <a class="nav-link" href="boutique.html">Boutique</a>
+      <a class="nav-link" href="blog.html">Blog</a>
+      <a class="nav-link" href="mission.html">Notre Mission</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="cart-btn" onclick="toggleCart()" aria-label="Panier">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-count hidden" id="cartCount">0</span>
+      </button>
+      <button class="burger-btn" id="burgerBtn" onclick="toggleMobileNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <a class="nav-link" href="index.html">Accueil</a>
+  <a class="nav-link" href="boutique.html">Boutique</a>
+  <a class="nav-link" href="blog.html">Blog</a>
+  <a class="nav-link" href="mission.html">Notre Mission</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+</nav>
+
+<main>
+
+  <section class="page-hero">
+    <h1>Mentions légales</h1>
+    <p>Informations légales et conditions d'utilisation du site Pawtner.</p>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="legal-body">
+
+        <div class="legal-banner">
+          ⚠️ <strong>Site fictif à vocation académique</strong> — Ce site a été créé dans le cadre d'un mémoire de Bachelor DCM Bac+3. Il ne constitue pas un site commercial réel.
+        </div>
+
+        <h2>1. Éditeur du site</h2>
+        <p>Le site Pawtner est un projet pédagogique fictif réalisé dans le cadre d'un mémoire de fin d'études (Bachelor DCM Bac+3). Il ne correspond à aucune entreprise réelle, immatriculée ou en activité.</p>
+        <p>Adresse fictive : 12 rue des Artisans, 75011 Paris, France<br>
+        Email de contact fictif : contact@pawtner.fr</p>
+
+        <h2>2. Hébergement</h2>
+        <p>Ce site est hébergé à des fins de démonstration académique. Aucun hébergement commercial n'est associé à ce projet.</p>
+
+        <h2>3. Propriété intellectuelle</h2>
+        <p>L'ensemble des contenus présents sur ce site (textes, visuels, structure) ont été créés dans un cadre éducatif. La marque "Pawtner" est fictive et n'est pas déposée.</p>
+
+        <h2>4. Absence de transactions réelles</h2>
+        <p>Ce site ne propose aucune vente réelle. Les produits affichés, les prix, les stocks et les processus de commande sont entièrement fictifs et simulés à des fins de démonstration :</p>
+        <ul>
+          <li>Aucune transaction bancaire n'est effectuée</li>
+          <li>Aucun produit n'est expédié</li>
+          <li>Les informations de carte bancaire saisies ne sont ni collectées ni transmises</li>
+          <li>Les commandes passées ne génèrent aucun engagement contractuel</li>
+        </ul>
+
+        <h2>5. Données personnelles</h2>
+        <p>Ce site ne collecte, ne stocke et ne traite aucune donnée personnelle. Les formulaires (contact, commande, newsletter) sont purement simulés :</p>
+        <ul>
+          <li>Les données saisies dans les formulaires ne sont pas envoyées ni enregistrées</li>
+          <li>Aucun cookie de traçage n'est utilisé</li>
+          <li>Aucun tiers (analytique, publicitaire) n'est impliqué</li>
+        </ul>
+        <p>Ce site est donc exempt des obligations RGPD relatives à la collecte de données, dans la mesure où aucune donnée n'est effectivement traitée.</p>
+
+        <h2>6. Limitation de responsabilité</h2>
+        <p>Les informations présentes sur ce site (conseils nutritionnels, guides, articles de blog) sont fournies à titre éducatif et informatif uniquement. Elles ne constituent pas un avis vétérinaire. Pour toute question relative à la santé de votre animal, consultez un vétérinaire qualifié.</p>
+
+        <h2>7. Crédits</h2>
+        <p>Ce projet a été réalisé dans le cadre d'une formation Bachelor DCM Bac+3. Il illustre les compétences acquises en création de sites e-commerce, identité visuelle et expérience utilisateur.</p>
+        <p>Typographies utilisées : Fraunces &amp; DM Sans (Google Fonts, licences SIL Open Font).</p>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══ PANIER ══ -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h3>🛒 Mon panier</h3>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-summary">
+      <div class="cart-row"><span>Sous-total</span><span id="cartSubtotal">0,00 €</span></div>
+      <div class="cart-row"><span>Livraison</span><span>3,99 €</span></div>
+      <div class="cart-row total"><span>Total</span><span id="cartTotal">0,00 €</span></div>
+    </div>
+    <button class="btn btn-primary cart-checkout" onclick="openCheckout()">Passer commande →</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Finaliser ma commande</h3>
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="modal-body" id="checkoutBody">
+      <form onsubmit="confirmOrder(event)">
+        <h4 style="font-family:'Fraunces',serif;font-size:16px;margin-bottom:16px;color:var(--muted);">Informations de livraison</h4>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Prénom</label><input class="form-input" type="text" placeholder="Jean" required /></div>
+          <div class="form-group"><label class="form-label">Nom</label><input class="form-input" type="text" placeholder="Dupont" required /></div>
+        </div>
+        <div class="form-group"><label class="form-label">Adresse</label><input class="form-input" type="text" placeholder="12 rue de la Paix" required /></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Code postal</label><input class="form-input" type="text" placeholder="75001" required /></div>
+          <div class="form-group"><label class="form-label">Ville</label><input class="form-input" type="text" placeholder="Paris" required /></div>
+        </div>
+        <h4 style="font-family:'Fraunces',serif;font-size:16px;margin:20px 0 16px;color:var(--muted);">Paiement (simulation)</h4>
+        <div class="card-preview">
+          <div class="card-chip">💳</div>
+          <div class="card-number">•••• •••• •••• ••••</div>
+          <div class="card-meta"><span>TITULAIRE</span><span>MM/AA</span></div>
+        </div>
+        <div class="form-group"><label class="form-label">Numéro de carte</label><input class="form-input" type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)" required /></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Date d'expiration</label><input class="form-input" type="text" placeholder="MM/AA" maxlength="5" required /></div>
+          <div class="form-group"><label class="form-label">CVV</label><input class="form-input" type="text" placeholder="•••" maxlength="3" required /></div>
+        </div>
+        <div style="background:rgba(122,158,126,.12);border-radius:8px;padding:12px 14px;font-size:13px;color:#3a4a3c;margin-bottom:20px;">
+          🔒 Paiement 100% fictif — aucune donnée bancaire n'est collectée ou transmise.
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:15px;">Confirmer la commande →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut">↑</button>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="index.html">
+          <div class="logo-paw">🐾</div>
+          <div class="logo-text">Pawt<span>ner</span></div>
+        </a>
+        <p>"Tout pour votre compagnon, sans compromis." — Nutrition et accessoires pour chiens, pensés par des passionnés.</p>
+        <div class="footer-socials">
+          <div class="social-btn" title="Instagram (fictif)">📸</div>
+          <div class="social-btn" title="TikTok (fictif)">🎵</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="boutique.html">Boutique</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="mission.html">Notre Mission</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Informations</h4>
+        <ul>
+          <li><a href="legal.html">Mentions légales</a></li>
+          <li><a href="legal.html">Confidentialité</a></li>
+          <li><a href="contact.html">Livraison &amp; retours</a></li>
+          <li><a href="contact.html">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Pawtner — Site fictif à vocation académique</span>
+      <span>Mémoire Bachelor DCM Bac+3</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => { updateCartUI(); });
+</script>
+<!-- Chatbot Pawtner -->
+<div id="pw-launcher" onclick="pwOpen()">
+  <div id="pw-hint">Une question ? 🐾</div>
+  <div id="pw-btn">
+    <img src="Images/logochatbot.png" alt="Pawtner">
+  </div>
+</div>
+<div id="pw-chat">
+  <div id="pw-head">
+    <div id="pw-head-avatar">
+      <img src="Images/logochatbot.png" alt="Pawtner">
+    </div>
+    <div id="pw-head-info">
+      <div id="pw-head-name">Pawtner</div>
+      <div id="pw-head-status"><span class="pw-dot"></span>Répond instantanément</div>
+    </div>
+    <button id="pw-x" onclick="pwClose()">×</button>
+  </div>
+  <div id="pw-msgs">
+    <div class="pw-m bot">Bonjour ! Je suis là pour répondre à toutes vos questions sur vos commandes, nos produits et notre marque 🐾</div>
+  </div>
+  <div id="pw-chips">
+    <button class="pw-chip" onclick="pwChip(this)">Où est ma commande ?</button>
+    <button class="pw-chip" onclick="pwChip(this)">Faire un retour</button>
+    <button class="pw-chip" onclick="pwChip(this)">Être remboursé</button>
+    <button class="pw-chip" onclick="pwChip(this)">Provenance des produits</button>
+    <button class="pw-chip" onclick="pwChip(this)">Fiabilité de Pawtner</button>
+    <button class="pw-chip" onclick="pwChip(this)">Délai de livraison</button>
+  </div>
+  <div id="pw-bar">
+    <input id="pw-inp" placeholder="Votre question..." autocomplete="off"
+      onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();pwSend()}" />
+    <button id="pw-go" onclick="pwSend()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M14.5 8L1.5 1.5l2.8 6.5-2.8 6.5L14.5 8z" fill="#FDF8F2"/>
+      </svg>
+    </button>
+  </div>
+  <div id="pw-foot">Pawtner · Toujours là pour votre chien</div>
+</div>
+<script src="chatbot.js"></script>
+</body>
+</html>

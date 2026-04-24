@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Pawtner</title>
+  <meta name="description" content="Conseils nutrition, guides pratiques et informations pour le bien-être de votre chien — le blog Pawtner." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header id="header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-paw">🐾</div>
+      <div class="logo-text">Pawt<span>ner</span></div>
+    </a>
+    <nav class="main-nav">
+      <a class="nav-link" href="index.html">Accueil</a>
+      <a class="nav-link" href="boutique.html">Boutique</a>
+      <a class="nav-link active" href="blog.html">Blog</a>
+      <a class="nav-link" href="mission.html">Notre Mission</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="cart-btn" onclick="toggleCart()" aria-label="Panier">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-count hidden" id="cartCount">0</span>
+      </button>
+      <button class="burger-btn" id="burgerBtn" onclick="toggleMobileNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <a class="nav-link" href="index.html">Accueil</a>
+  <a class="nav-link" href="boutique.html">Boutique</a>
+  <a class="nav-link" href="blog.html">Blog</a>
+  <a class="nav-link" href="mission.html">Notre Mission</a>
+  <a class="nav-link" href="contact.html">Contact</a>
+</nav>
+
+<main>
+
+  <section class="page-hero">
+    <h1>Le blog Pawtner</h1>
+    <p>Conseils d'experts, guides pratiques et informations nutritionnelles pour le bien-être de votre chien.</p>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="blog-grid">
+
+        <a class="blog-card" href="article-1.html">
+          <div class="blog-img" style="background:#FDF0E6;">🍽️</div>
+          <div class="blog-body">
+            <div class="blog-meta"><span class="blog-tag">Alimentation</span><span>15 Jan 2025</span><span>8 min de lecture</span></div>
+            <div class="blog-title">Quelle quantité de croquettes donner à mon chien ? Le guide complet</div>
+            <div class="blog-excerpt">Rations selon le poids, l'âge et l'activité, méthode BCS et ajustements : tout ce qu'il faut savoir pour bien nourrir votre chien.</div>
+            <div class="blog-read-more">Lire l'article →</div>
+          </div>
+        </a>
+
+        <a class="blog-card" href="article-2.html">
+          <div class="blog-img" style="background:#EEF5EE;">🏷️</div>
+          <div class="blog-body">
+            <div class="blog-meta"><span class="blog-tag">Nutrition</span><span>28 Jan 2025</span><span>10 min de lecture</span></div>
+            <div class="blog-title">Comment lire une étiquette de croquettes : ce que les marques ne vous disent pas</div>
+            <div class="blog-excerpt">Ordre des ingrédients, farine vs viande fraîche, additifs à éviter et teneurs analytiques : décryptage complet.</div>
+            <div class="blog-read-more">Lire l'article →</div>
+          </div>
+        </a>
+
+        <a class="blog-card" href="article-3.html">
+          <div class="blog-img" style="background:#F5ECD8;">🎽</div>
+          <div class="blog-body">
+            <div class="blog-meta"><span class="blog-tag">Accessoires</span><span>10 Fév 2025</span><span>6 min de lecture</span></div>
+            <div class="blog-title">Harnais ou collier pour son chien : comment choisir selon sa morphologie</div>
+            <div class="blog-excerpt">Risques du collier sur la trachée, avantages du harnais, guide des tailles selon la race et la corpulence.</div>
+            <div class="blog-read-more">Lire l'article →</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══ PANIER ══ -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h3>🛒 Mon panier</h3>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-summary">
+      <div class="cart-row"><span>Sous-total</span><span id="cartSubtotal">0,00 €</span></div>
+      <div class="cart-row"><span>Livraison</span><span>3,99 €</span></div>
+      <div class="cart-row total"><span>Total</span><span id="cartTotal">0,00 €</span></div>
+    </div>
+    <button class="btn btn-primary cart-checkout" onclick="openCheckout()">Passer commande →</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Finaliser ma commande</h3>
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="modal-body" id="checkoutBody">
+      <form onsubmit="confirmOrder(event)">
+        <h4 style="font-family:'Fraunces',serif;font-size:16px;margin-bottom:16px;color:var(--muted);">Informations de livraison</h4>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Prénom</label><input class="form-input" type="text" placeholder="Jean" required /></div>
+          <div class="form-group"><label class="form-label">Nom</label><input class="form-input" type="text" placeholder="Dupont" required /></div>
+        </div>
+        <div class="form-group"><label class="form-label">Adresse</label><input class="form-input" type="text" placeholder="12 rue de la Paix" required /></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Code postal</label><input class="form-input" type="text" placeholder="75001" required /></div>
+          <div class="form-group"><label class="form-label">Ville</label><input class="form-input" type="text" placeholder="Paris" required /></div>
+        </div>
+        <h4 style="font-family:'Fraunces',serif;font-size:16px;margin:20px 0 16px;color:var(--muted);">Paiement (simulation)</h4>
+        <div class="card-preview">
+          <div class="card-chip">💳</div>
+          <div class="card-number">•••• •••• •••• ••••</div>
+          <div class="card-meta"><span>TITULAIRE</span><span>MM/AA</span></div>
+        </div>
+        <div class="form-group"><label class="form-label">Numéro de carte</label><input class="form-input" type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)" required /></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Date d'expiration</label><input class="form-input" type="text" placeholder="MM/AA" maxlength="5" required /></div>
+          <div class="form-group"><label class="form-label">CVV</label><input class="form-input" type="text" placeholder="•••" maxlength="3" required /></div>
+        </div>
+        <div style="background:rgba(122,158,126,.12);border-radius:8px;padding:12px 14px;font-size:13px;color:#3a4a3c;margin-bottom:20px;">
+          🔒 Paiement 100% fictif — aucune donnée bancaire n'est collectée ou transmise.
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:15px;">Confirmer la commande →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Retour en haut">↑</button>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="index.html">
+          <div class="logo-paw">🐾</div>
+          <div class="logo-text">Pawt<span>ner</span></div>
+        </a>
+        <p>"Tout pour votre compagnon, sans compromis." — Nutrition et accessoires pour chiens, pensés par des passionnés.</p>
+        <div class="footer-socials">
+          <div class="social-btn" title="Instagram (fictif)">📸</div>
+          <div class="social-btn" title="TikTok (fictif)">🎵</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="boutique.html">Boutique</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="mission.html">Notre Mission</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Informations</h4>
+        <ul>
+          <li><a href="legal.html">Mentions légales</a></li>
+          <li><a href="legal.html">Confidentialité</a></li>
+          <li><a href="contact.html">Livraison &amp; retours</a></li>
+          <li><a href="contact.html">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Pawtner — Site fictif à vocation académique</span>
+      <span>Mémoire Bachelor DCM Bac+3</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => { updateCartUI(); });
+</script>
+<!-- Chatbot Pawtner -->
+<div id="pw-launcher" onclick="pwOpen()">
+  <div id="pw-hint">Une question ? 🐾</div>
+  <div id="pw-btn">
+    <img src="Images/logochatbot.png" alt="Pawtner">
+  </div>
+</div>
+<div id="pw-chat">
+  <div id="pw-head">
+    <div id="pw-head-avatar">
+      <img src="Images/logochatbot.png" alt="Pawtner">
+    </div>
+    <div id="pw-head-info">
+      <div id="pw-head-name">Pawtner</div>
+      <div id="pw-head-status"><span class="pw-dot"></span>Répond instantanément</div>
+    </div>
+    <button id="pw-x" onclick="pwClose()">×</button>
+  </div>
+  <div id="pw-msgs">
+    <div class="pw-m bot">Bonjour ! Je suis là pour répondre à toutes vos questions sur vos commandes, nos produits et notre marque 🐾</div>
+  </div>
+  <div id="pw-chips">
+    <button class="pw-chip" onclick="pwChip(this)">Où est ma commande ?</button>
+    <button class="pw-chip" onclick="pwChip(this)">Faire un retour</button>
+    <button class="pw-chip" onclick="pwChip(this)">Être remboursé</button>
+    <button class="pw-chip" onclick="pwChip(this)">Provenance des produits</button>
+    <button class="pw-chip" onclick="pwChip(this)">Fiabilité de Pawtner</button>
+    <button class="pw-chip" onclick="pwChip(this)">Délai de livraison</button>
+  </div>
+  <div id="pw-bar">
+    <input id="pw-inp" placeholder="Votre question..." autocomplete="off"
+      onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();pwSend()}" />
+    <button id="pw-go" onclick="pwSend()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M14.5 8L1.5 1.5l2.8 6.5-2.8 6.5L14.5 8z" fill="#FDF8F2"/>
+      </svg>
+    </button>
+  </div>
+  <div id="pw-foot">Pawtner · Toujours là pour votre chien</div>
+</div>
+<script src="chatbot.js"></script>
+</body>
+</html>
