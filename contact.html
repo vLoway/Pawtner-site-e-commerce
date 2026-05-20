@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -8,22 +8,77 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+<!-- ══ BARRE ANNONCE ══ -->
+<div id="announce-bar">
+  <div class="ab-messages" id="ab-messages">
+    <div class="ab-msg active">🚚 Livraison offerte dès 40€</div>
+    <div class="ab-msg">🦴 Friandises 100% naturelles</div>
+    <div class="ab-msg">🎁 Code WELCOME15 sur votre première commande</div>
+    <div class="ab-msg">⏱ Offre valable encore <span id="ab-timer">23:59:00</span></div>
+  </div>
+  <button class="ab-close" onclick="closeAnnounce()" aria-label="Fermer">✕</button>
+</div>
+<script>
+(function(){
+  if(localStorage.getItem("ab_closed")==="1"){return;}
+  document.body.classList.add("has-announce");
+
+  /* ── countdown ── */
+  var TOTAL = 3*3600;
+  var key   = "ab_timer_end";
+  var end   = parseInt(localStorage.getItem(key)||"0",10);
+  if(!end || end <= Date.now()/1000){
+    end = Math.floor(Date.now()/1000) + TOTAL;
+    localStorage.setItem(key, end);
+  }
+  function fmtTimer(){
+    var rem = Math.max(0, end - Math.floor(Date.now()/1000));
+    if(rem===0){ end = Math.floor(Date.now()/1000)+TOTAL; localStorage.setItem(key,end); rem=TOTAL; }
+    var h=Math.floor(rem/3600), m=Math.floor((rem%3600)/60), s=rem%60;
+    return (h<10?"0":"")+h+":"+(m<10?"0":"")+m+":"+(s<10?"0":"")+s;
+  }
+  var timerEl = document.getElementById("ab-timer");
+  if(timerEl) timerEl.textContent = fmtTimer();
+  setInterval(function(){ if(timerEl) timerEl.textContent = fmtTimer(); }, 1000);
+
+  /* ── rotation ── */
+  var msgs=document.querySelectorAll(".ab-msg"),cur=0,rotTimer;
+  function next(){
+    msgs[cur].classList.remove("active");
+    msgs[cur].classList.add("exit");
+    var prev=cur;
+    setTimeout(function(){msgs[prev].classList.remove("exit");},400);
+    cur=(cur+1)%msgs.length;
+    msgs[cur].classList.add("active");
+  }
+  rotTimer=setInterval(next,3000);
+
+  window.closeAnnounce=function(){
+    clearInterval(rotTimer);
+    var bar=document.getElementById("announce-bar");
+    bar.classList.add("hidden");
+    document.body.classList.remove("has-announce");
+    localStorage.setItem("ab_closed","1");
+  };
+})();
+</script>
 
 <!-- ══ HEADER ══ -->
 <header id="header">
   <div class="header-inner">
     <a class="logo" href="index.html">
-      <div class="logo-paw">🐾</div>
-      <div class="logo-text">Pawt<span>ner</span></div>
+      <img src="Images/Logo.png" alt="Pawtner">
     </a>
     <nav class="main-nav">
       <a class="nav-link" href="index.html">Accueil</a>
       <a class="nav-link" href="boutique.html">Boutique</a>
       <a class="nav-link" href="blog.html">Blog</a>
       <a class="nav-link" href="mission.html">Notre Mission</a>
+      <a class="nav-link" href="histoire.html">Notre Histoire</a>
       <a class="nav-link active" href="contact.html">Contact</a>
     </nav>
     <div class="header-actions">
+      <button class="account-btn" onclick="openAccount()" aria-label="Espace client"><span class="account-icon">👤</span><span class="account-badge hidden"></span></button>
       <button class="cart-btn" onclick="toggleCart()" aria-label="Panier">
         <span class="cart-icon">🛒</span>
         <span class="cart-count hidden" id="cartCount">0</span>
@@ -40,6 +95,7 @@
   <a class="nav-link" href="boutique.html">Boutique</a>
   <a class="nav-link" href="blog.html">Blog</a>
   <a class="nav-link" href="mission.html">Notre Mission</a>
+      <a class="nav-link" href="histoire.html">Notre Histoire</a>
   <a class="nav-link" href="contact.html">Contact</a>
 </nav>
 
@@ -136,10 +192,11 @@
     <button class="cart-close" onclick="toggleCart()">✕</button>
   </div>
   <div class="cart-items" id="cartItems"></div>
+  <div id="cart-free-ship"></div>
   <div class="cart-footer" id="cartFooter" style="display:none;">
     <div class="cart-summary">
       <div class="cart-row"><span>Sous-total</span><span id="cartSubtotal">0,00 €</span></div>
-      <div class="cart-row"><span>Livraison</span><span>3,99 €</span></div>
+      <div class="cart-row"><span>Livraison</span><span id="cartShipping">3,99 €</span></div>
       <div class="cart-row total"><span>Total</span><span id="cartTotal">0,00 €</span></div>
     </div>
     <button class="btn btn-primary cart-checkout" onclick="openCheckout()">Passer commande →</button>
@@ -178,6 +235,62 @@
         <div style="background:rgba(122,158,126,.12);border-radius:8px;padding:12px 14px;font-size:13px;color:#3a4a3c;margin-bottom:20px;">
           🔒 Paiement 100% fictif — aucune donnée bancaire n'est collectée ou transmise.
         </div>
+        <div class="payment-logos">
+          <!-- Visa -->
+          <div class="pay-logo">
+            <svg width="38" height="14" viewBox="0 0 38 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.5 1L11.2 13H8.2L11.5 1H14.5Z" fill="#1A1F71"/>
+              <path d="M26.3 1.3C25.6 1 24.5.8 23.1.8c-3.3 0-5.6 1.7-5.6 4.2 0 1.8 1.7 2.8 3 3.4 1.3.6 1.7 1 1.7 1.5 0 .8-1 1.2-2 1.2-1.3 0-2-.2-3.1-.7l-.4-.2-.5 2.8c.9.4 2.4.7 4 .7 3.5 0 5.8-1.7 5.8-4.3 0-1.4-.9-2.5-2.9-3.4-1.2-.6-2-1-2-1.6 0-.5.6-1.1 2-1.1 1.1 0 1.9.2 2.5.5l.3.1.5-2.7Z" fill="#1A1F71"/>
+              <path d="M30.1 1h-2.6c-.8 0-1.4.2-1.7 1L21 13h3.5l.7-1.9h4.3l.4 1.9H33L30.1 1Zm-4.1 7.6 1.3-3.6.4-1.1.2 1 .7 3.7h-2.6Z" fill="#1A1F71"/>
+              <path d="M7.2 1L4 9.3 3.7 7.8C3.1 5.9 1.4 3.8.1 2.7L3 13h3.5L10.7 1H7.2Z" fill="#1A1F71"/>
+              <path d="M2.1 1H.1L0 1.6c1.6.4 3.2 1.4 3.7 2.2L2.1 1Z" fill="#F9A533"/>
+            </svg>
+          </div>
+          <!-- Mastercard -->
+          <div class="pay-logo">
+            <svg width="34" height="22" viewBox="0 0 34 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="34" height="22" rx="3" fill="white"/>
+              <circle cx="13" cy="11" r="7" fill="#EB001B"/>
+              <circle cx="21" cy="11" r="7" fill="#F79E1B"/>
+              <path d="M17 5.8A7 7 0 0 1 20.5 11 7 7 0 0 1 17 16.2 7 7 0 0 1 13.5 11 7 7 0 0 1 17 5.8Z" fill="#FF5F00"/>
+            </svg>
+          </div>
+          <!-- PayPal -->
+          <div class="pay-logo">
+            <svg width="52" height="14" viewBox="0 0 52 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.5 1H2L.5 10h2.2l.4-2.5h1.7c2.5 0 4-1.3 4-3.5C8.8 2.1 7.9 1 6.5 1ZM6.1 5.8H4.7l.4-2.5H6.5c.8 0 1.2.4 1.2 1.1 0 .8-.6 1.4-1.6 1.4Z" fill="#003087"/>
+              <path d="M13.5 4.5c-1.8 0-3.2 1.4-3.2 3.2 0 1.3.9 2.2 2.2 2.2.7 0 1.3-.3 1.7-.8l-.1.7h2l1-5.2h-2l-.1.4c-.4-.4-1-.5-1.5-.5Zm.3 1.8c.7 0 1.2.5 1.2 1.2 0 .8-.6 1.4-1.4 1.4-.7 0-1.2-.5-1.2-1.2 0-.8.6-1.4 1.4-1.4Z" fill="#003087"/>
+              <path d="M20 4.6h-2.2l-1.5 5.3h2.1l.8-3c.2-.8.7-1.2 1.4-1.2h.3l.4-2.1h-.3c-.5 0-.8.2-1 1Z" fill="#003087"/>
+              <path d="M24.5 4.5c-1.8 0-3.2 1.4-3.2 3.2 0 1.3.9 2.2 2.2 2.2.7 0 1.3-.3 1.7-.8l-.1.7h2l1-5.2h-2l-.1.4c-.4-.4-1-.5-1.5-.5Zm.3 1.8c.7 0 1.2.5 1.2 1.2 0 .8-.6 1.4-1.4 1.4-.7 0-1.2-.5-1.2-1.2 0-.8.6-1.4 1.4-1.4Z" fill="#009CDE"/>
+              <path d="M33.5 1H29l-1.5 9h2.2l.4-2.5H32c2.5 0 4-1.3 4-3.5-.1-1.9-1-3-2.5-3Zm-.4 4.8H31.7l.4-2.5h1.4c.8 0 1.2.4 1.2 1.1 0 .8-.6 1.4-1.6 1.4Z" fill="#009CDE"/>
+            </svg>
+          </div>
+          <!-- American Express -->
+          <div class="pay-logo">
+            <svg width="40" height="14" viewBox="0 0 40 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="14" rx="2" fill="#2E77BC"/>
+              <path d="M4 10V4h5.5l1 2 1-2H17v6h-1.5V5.5l-1.5 3h-1l-1.5-3V10H4Zm2-4.5V8.5h1V5.5h.5L9 8h.5L11 5.5h.5V8.5H13V5.5H4Z" fill="white"/>
+              <path d="M18 10V4h6v1.5h-4V6.5h4V8h-4v.5h4V10h-6Z" fill="white"/>
+              <path d="M25 10V4h2l3 4V4h1.5v6H30l-3.5-4.5V10H25Z" fill="white"/>
+            </svg>
+          </div>
+          <!-- Stripe -->
+          <div class="pay-logo">
+            <svg width="36" height="16" viewBox="0 0 36 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6.2C4 5.5 4.6 5.2 5.5 5.2c1.3 0 2.9.4 4.2 1.1V3.1C8.4 2.4 7.1 2 5.5 2 2.4 2 .5 3.6.5 6.4c0 4.3 5.9 3.6 5.9 5.4 0 .8-.7 1.1-1.7 1.1-1.4 0-3.3-.6-4.7-1.4v3.3C1.4 15.6 3 16 4.7 16c3.2 0 5.3-1.5 5.3-4.4C10 7.2 4 8 4 6.2Z" fill="#6772E5"/>
+              <path d="M36 8.5c0-3.5-1.7-6.5-5-6.5-3.4 0-5.4 3-5.4 6.5 0 4.3 2.4 6.5 5.9 6.5 1.7 0 3-.4 3.9-1v-2.7c-.9.5-2 .8-3.3.8-1.3 0-2.5-.5-2.6-2.1H36c0-.2.1-.9.1-1.5Zm-7.5-1.3c0-1.5.9-2.1 1.8-2.1.8 0 1.7.6 1.7 2.1h-3.5Z" fill="#6772E5"/>
+              <path d="M15 3h2v12h-2zM12.5 3H10l-2.5 12h2.5l.5-2.5h2.5l.5 2.5H16L13.5 3Zm-2 7.5 1-5 1 5h-2Z" fill="#6772E5"/>
+            </svg>
+          </div>
+          <!-- SSL -->
+          <div class="pay-logo" style="gap:4px;">
+            <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 0L0 2.5V7c0 3.3 2.6 6 6 6.5C9.4 13 12 10.3 12 7V2.5L6 0Z" fill="#3a7a3a"/>
+              <path d="M5 7.5L3.5 6 2.5 7l2.5 2.5 5-5-1-1L5 7.5Z" fill="white"/>
+            </svg>
+            <span style="font-size:10px;font-weight:700;color:#3a7a3a;letter-spacing:.03em;">SSL</span>
+          </div>
+        </div>
         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:15px;">Confirmer la commande →</button>
       </form>
     </div>
@@ -193,8 +306,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a class="logo" href="index.html">
-          <div class="logo-paw">🐾</div>
-          <div class="logo-text">Pawt<span>ner</span></div>
+          <img src="Images/Logo.png" alt="Pawtner">
         </a>
         <p>"Tout pour votre compagnon, sans compromis." — Nutrition et accessoires pour chiens, pensés par des passionnés.</p>
         <div class="footer-socials">
@@ -214,6 +326,7 @@
       <div class="footer-col">
         <h4>Informations</h4>
         <ul>
+          <li><a href="histoire.html">Notre Histoire</a></li>
           <li><a href="legal.html">Mentions légales</a></li>
           <li><a href="legal.html">Confidentialité</a></li>
           <li><a href="contact.html">Livraison &amp; retours</a></li>
@@ -272,6 +385,131 @@
   </div>
   <div id="pw-foot">Pawtner · Toujours là pour votre chien</div>
 </div>
+<!-- ══ ESPACE CLIENT ══ -->
+<div id="account-overlay" onclick="closeAccount()"></div>
+<div id="account-panel">
+  <div class="ac-head">
+    <div>
+      <div class="ac-head-title">Mon espace Pawtner</div>
+      <div class="ac-head-sub">Fidélité · Commandes · Offres personnalisées</div>
+    </div>
+    <button class="ac-close" onclick="closeAccount()">×</button>
+  </div>
+  <div id="ac-auth" style="display:flex;flex-direction:column;overflow-y:auto;padding:32px 28px;">
+    <div class="ac-auth-hero">
+      <div class="ac-auth-icon">🐾</div>
+      <div class="ac-auth-title">Rejoignez la famille Pawtner</div>
+      <div class="ac-auth-sub">Créez votre compte gratuit et profitez d'avantages exclusifs pour vous et votre chien.</div>
+    </div>
+    <div class="ac-perks">
+      <div class="ac-perk"><div class="ac-perk-icon">⭐</div><div><div class="ac-perk-label">Points fidélité</div><div class="ac-perk-desc">1 pt par euro dépensé</div></div></div>
+      <div class="ac-perk"><div class="ac-perk-icon">📦</div><div><div class="ac-perk-label">Suivi commandes</div><div class="ac-perk-desc">Historique complet</div></div></div>
+      <div class="ac-perk"><div class="ac-perk-icon">🧾</div><div><div class="ac-perk-label">Factures</div><div class="ac-perk-desc">Téléchargeables</div></div></div>
+      <div class="ac-perk"><div class="ac-perk-icon">🎁</div><div><div class="ac-perk-label">Offres perso.</div><div class="ac-perk-desc">Selon vos achats</div></div></div>
+    </div>
+    <div class="ac-tabs">
+      <button class="ac-tab active" id="ac-tab-login"    onclick="renderAuth('login')">Se connecter</button>
+      <button class="ac-tab"        id="ac-tab-register" onclick="renderAuth('register')">Créer un compte</button>
+    </div>
+    <div id="ac-error" class="ac-error"></div>
+    <div id="ac-form" class="ac-form">
+      <div class="ac-field"><label>Adresse e-mail</label><input type="email" id="ac-email" placeholder="votre@email.fr" autocomplete="email" /></div>
+      <div class="ac-field"><label>Mot de passe</label><input type="password" id="ac-password" placeholder="••••••••" autocomplete="current-password" /></div>
+      <button class="ac-submit" onclick="acLogin()">Se connecter →</button>
+    </div>
+    <div class="ac-divider">ou</div>
+    <button class="ac-guest" onclick="closeAccount()">Continuer sans compte</button>
+  </div>
+  <div id="ac-logged" style="display:none;flex-direction:column;overflow:hidden;flex:1;">
+    <div class="ac-profile-bar">
+      <div class="ac-avatar" id="ac-avatar">?</div>
+      <div>
+        <div class="ac-profile-name" id="ac-name"></div>
+        <div class="ac-profile-email" id="ac-email-display"></div>
+      </div>
+    </div>
+    <div class="ac-points-bar">
+      <div class="ac-points-row">
+        <div><div class="ac-points-label">Mes points</div><div class="ac-points-val" id="ac-pts-val">0 pts</div></div>
+        <div style="text-align:right;"><div class="ac-points-label">Niveau</div><div style="font-size:14px;font-weight:700;color:var(--dark);" id="ac-pts-tier"></div></div>
+      </div>
+      <div class="ac-progress"><div class="ac-progress-fill" id="ac-pts-fill" style="width:0%"></div></div>
+      <div class="ac-next-reward" id="ac-pts-next"></div>
+    </div>
+    <nav class="ac-nav">
+      <button class="ac-nav-btn active" data-tab="loyalty"  onclick="switchTab('loyalty')"><span class="ac-nav-icon">⭐</span>Fidélité</button>
+      <button class="ac-nav-btn"        data-tab="orders"   onclick="switchTab('orders')"><span class="ac-nav-icon">📦</span>Commandes</button>
+      <button class="ac-nav-btn"        data-tab="offers"   onclick="switchTab('offers')"><span class="ac-nav-icon">🎁</span>Offres</button>
+      <button class="ac-nav-btn"        data-tab="profile"  onclick="switchTab('profile')"><span class="ac-nav-icon">👤</span>Profil</button>
+      <button class="ac-nav-btn"        data-tab="referral" onclick="switchTab('referral')"><span class="ac-nav-icon">🤝</span>Parrainage</button>
+    </nav>
+    <div class="ac-content" id="ac-content"></div>
+  </div>
+</div>
+<div id="invoice-modal">
+  <div class="invoice-box">
+    <button class="invoice-close" onclick="closeInvoice()">×</button>
+    <div class="invoice-header">
+      <div class="invoice-logo">🐾 Pawtner</div>
+      <div class="invoice-num">Facture <span id="inv-num"></span> · <span id="inv-date"></span></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:6px;">Client : <span id="inv-client"></span> · <span id="inv-email"></span></div>
+    </div>
+    <div id="inv-items"></div>
+    <div class="invoice-row"><span>Sous-total</span><span id="inv-subtotal"></span></div>
+    <div class="invoice-row"><span>Livraison</span><span id="inv-shipping"></span></div>
+    <div class="invoice-row total"><span>Total TTC</span><span id="inv-total"></span></div>
+    <div class="invoice-footer">Pawtner · Site fictif à vocation académique · support@pawtner.fr</div>
+    <button class="invoice-print" onclick="window.print()">🖨️ Imprimer / Télécharger</button>
+  </div>
+</div>
+<script src="account.js"></script>
+<!-- ══ EXIT INTENT POPUP ══ -->
+<div id="exit-overlay">
+  <div id="exit-box">
+    <div class="exit-top">
+      <button class="exit-close-x" onclick="exitClose()" aria-label="Fermer">✕</button>
+      <div class="exit-dog">🐾</div>
+      <div class="exit-eyebrow">Offre exclusive — partez pas !</div>
+      <div class="exit-title">Attendez !<br><em>Voici −5% supplémentaires</em></div>
+    </div>
+    <div class="exit-body">
+      <p class="exit-sub">On vous offre un code de réduction supplémentaire, juste parce que vous méritez le meilleur pour votre chien.</p>
+      <div class="exit-code-wrap">
+        <div class="exit-code-label">Votre code</div>
+        <div class="exit-code">EXTRA5</div>
+      </div>
+      <button class="exit-btn-main" onclick="exitClaim()">J'en profite — copier le code</button>
+      <div class="exit-copied-msg" id="exit-copied"></div>
+      <button class="exit-btn-skip" onclick="exitClose()">Non merci, je préfère payer plus cher</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  if(sessionStorage.getItem('exit_shown')) return;
+  var triggered = false;
+  document.addEventListener('mouseleave', function(e){
+    if(triggered || e.clientY > 10) return;
+    triggered = true;
+    sessionStorage.setItem('exit_shown','1');
+    document.getElementById('exit-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+  window.exitClose = function(){
+    document.getElementById('exit-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+  window.exitClaim = function(){
+    navigator.clipboard.writeText('EXTRA5').catch(function(){});
+    var msg = document.getElementById('exit-copied');
+    msg.textContent = '✓ Code EXTRA5 copié dans le presse-papier !';
+    var btn = document.querySelector('.exit-btn-main');
+    btn.textContent = '✓ Code copié !';
+    btn.style.background = '#3a7a3a';
+    setTimeout(function(){ exitClose(); }, 1800);
+  };
+})();
+</script>
 <script src="chatbot.js"></script>
 </body>
 </html>
