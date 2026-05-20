@@ -2256,19 +2256,16 @@ body.has-announce #read-progress { top: calc(68px + 40px); }
   z-index: 9000;
   background: rgba(28,26,20,.55);
   backdrop-filter: blur(4px);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 20px;
   opacity: 0;
-  animation: nlOverlayIn .4s .6s ease forwards;
+  transition: opacity .35s ease;
 }
-#newsletter-overlay.hidden {
-  pointer-events: none;
-  animation: nlOverlayOut .3s ease forwards;
-}
-@keyframes nlOverlayIn  { to { opacity: 1; } }
-@keyframes nlOverlayOut { to { opacity: 0; } }
+#newsletter-overlay.visible { display: flex; }
+#newsletter-overlay.shown   { opacity: 1; }
+#newsletter-overlay.hidden  { opacity: 0; pointer-events: none; }
 
 #newsletter-box {
   position: relative;
@@ -2278,10 +2275,10 @@ body.has-announce #read-progress { top: calc(68px + 40px); }
   max-width: 540px;
   width: 100%;
   box-shadow: 0 24px 80px rgba(28,26,20,.22);
-  transform: translateY(28px) scale(.97);
-  animation: nlBoxIn .45s .65s cubic-bezier(.34,1.56,.64,1) forwards;
+  transform: translateY(20px) scale(.97);
+  transition: transform .4s cubic-bezier(.34,1.56,.64,1);
 }
-@keyframes nlBoxIn { to { transform: translateY(0) scale(1); } }
+#newsletter-overlay.shown #newsletter-box { transform: translateY(0) scale(1); }
 
 /* Bande déco terracotta en haut */
 #newsletter-box::before {

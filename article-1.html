@@ -490,15 +490,40 @@
 </div>
 <script>
 (function(){
+  (function(){
   if(sessionStorage.getItem('exit_shown')) return;
   var triggered = false;
-  document.addEventListener('mouseleave', function(e){
-    if(triggered || e.clientY > 10) return;
+
+  function showExitPopup(){
+    if(triggered) return;
     triggered = true;
     sessionStorage.setItem('exit_shown','1');
     document.getElementById('exit-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
+  }
+
+  /* Desktop : curseur quitte vers le haut */
+  document.addEventListener('mouseleave', function(e){
+    if(e.clientY <= 10) showExitPopup();
   });
+
+  /* Mobile : scroll rapide vers le haut */
+  var lastY = 0, lastTime = Date.now();
+  window.addEventListener('scroll', function(){
+    var y   = window.scrollY;
+    var now = Date.now();
+    var dy  = lastY - y;
+    var dt  = now - lastTime;
+    if(dy > 60 && dt < 300 && lastY > 200) showExitPopup();
+    lastY    = y;
+    lastTime = now;
+  }, { passive: true });
+
+  /* Mobile : 30s apres scroll */
+  setTimeout(function(){
+    if(!triggered && window.scrollY > 100) showExitPopup();
+  }, 30000);
+
   window.exitClose = function(){
     document.getElementById('exit-overlay').classList.remove('open');
     document.body.style.overflow = '';
@@ -512,7 +537,7 @@
     btn.style.background = '#3a7a3a';
     setTimeout(function(){ exitClose(); }, 1800);
   };
-})();
+})()
 </script>
 <script src="chatbot.js"></script>
 </body>
